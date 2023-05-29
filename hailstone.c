@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 void hailstone(int n) {
-    int length = 0; // Initialize the length of the sequence
-    printf("%d ", n); // Print the initial number
+    int length = 0; 
+    printf("%d ", n); 
 
     while (n != 1) {
         if (n % 2 == 0) {
@@ -11,11 +11,11 @@ void hailstone(int n) {
             n = 3 * n + 1;
         }
 
-        printf("%d ", n); // Print the next number in the sequence
-        length++; // Increment the sequence length
+        printf("%d ", n); 
+        length++; 
     }
 
-    printf("\nLength of the sequence: %d\n", length); // Print the length of the sequence
+    printf("\nLength of the sequence: %d\n", length); 
 }
 
 int main() {
