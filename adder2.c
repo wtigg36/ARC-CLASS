@@ -6,7 +6,7 @@ int adder() {
 }
 
 int assign() {
-    int y = 450 * 56;
+    int y = 456 * 50;
     return y;
 }
 
