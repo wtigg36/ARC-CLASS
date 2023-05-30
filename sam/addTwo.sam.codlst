@@ -1,0 +1,9 @@
+3007	000		sta	first
+d000	001		in	
+3008	002		sta	second
+0007	003		lda	first
+1008	004		add	second
+e000	005		out	
+f000	006		hlt	
+0000	007	first	dat	00
+0000	008	second	dat	00
