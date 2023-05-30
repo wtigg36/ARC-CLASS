@@ -1,0 +1,8 @@
+start:  in              ; Read the first number from the console into the accumulator
+        out             ; Output the first number
+        in              ; Read the second number from the console into the accumulator
+        sub     acc     ; Subtract the first number from the accumulator
+        brp     max1    ; Branch to max1 if the result is positive or zero
+        in              ; Read the first number into the accumulator (if the second number is greater)
+max1:   out             ; Output the maximum number
+        hlt             ; Halt the program
