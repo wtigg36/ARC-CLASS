@@ -1,0 +1,7 @@
+        INP     // Input the first number
+        STA A   // Store it in memory location A
+        INP     // Input the second number
+        ADD A   // Add the first number to the second number
+        OUT     // Output the result
+        HLT     // Halt the program
+A       DC 0    // Memory location A
