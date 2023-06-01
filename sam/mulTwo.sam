@@ -1,0 +1,17 @@
+in    dat 0
+done  dat 0
+acc   dat 0
+one   dat 1
+two   dat 2
+
+loop  lda two
+      add acc
+      sta two
+      lda acc
+      sub one
+      jaz loop
+
+      lda two
+      out
+      hlt
+

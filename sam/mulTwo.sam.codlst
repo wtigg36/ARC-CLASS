@@ -1,0 +1,14 @@
+0000	000	in	dat	0
+0000	001	done	dat	0
+0000	002	acc	dat	0
+0001	003	one	dat	1
+0002	004	two	dat	2
+0000	005	loop	lda	two
+0000	006		add	acc
+0000	007		sta	two
+0000	008		lda	acc
+0000	009		sub	one
+0000	00a		jaz	loop
+0000	00b		lda	two
+0000	00c		out	
+0000	00d		hlt	

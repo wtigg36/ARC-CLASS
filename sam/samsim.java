@@ -75,7 +75,7 @@ class samsim {
             else
                 pc++;
         } else if (opcode == 6) { // Jan
-            if (acc >= 128)
+            if (acc < 0)
                 pc = addr;
             else
                 pc++;
@@ -84,10 +84,12 @@ class samsim {
             acc = (acc * mem[addr]) & 0xffff;
         } else if (opcode == 8) { // Div
             pc++;
-            acc = (acc / mem[addr]) & 0xffff;
+            if (mem[addr] != 0)
+                acc = (acc / mem[addr]) & 0xffff;
         } else if (opcode == 9) { // Rem
             pc++;
-            acc = (acc % mem[addr]) & 0xffff;
+            if (mem[addr] != 0)
+                acc = (acc % mem[addr]) & 0xffff;
         } else if (opcode == 13) { // In
             pc++;
             System.out.print("In: ");
@@ -107,30 +109,32 @@ class samsim {
     public static void display() {
         System.out.println("SAM machine state");
         System.out.println(String.format("Pc: %03x Acc: %04x Out: %04x", pc, acc, out));
-        String pad = " ";
-        String pcmark = "> ";
+        String pad;
         for (int i = 0; i < codeLen; i++) {
             if (i == pc)
                 pad = "> ";
             else
                 pad = " ";
-            System.out.print(String.format(pad + "%03x %04x", i, mem[i]));
-            System.out.print("\t" + asm[i]);
-            System.out.println();
+            System.out.println(String.format(pad + "%03x %04x\t%s", i, mem[i], asm[i]));
         }
     }
 
     public static void initSamState(Scanner asmscan) {
-        int i;
+        int i = 0;
 
         pc = 0;
         acc = 0;
 
-        asmscan.useRadix(16);
+        asmscan.useDelimiter("\t|\r\n");
 
-        for (i = 0; i < MEMSIZE && asmscan.hasNext(); i++) {
-            mem[i] = asmscan.nextInt() & 0xffff;
-            asm[i] = asmscan.nextLine();
+        while (asmscan.hasNext()) {
+            String line = asmscan.next();
+            String[] parts = line.trim().split("\\s+");
+
+            mem[i] = Integer.parseInt(parts[2], 16);
+            asm[i] = parts[0] + "\t" + parts[1] + "\t" + parts[2] + "\t" + parts[3];
+
+            i++;
         }
 
         codeLen = i;
