@@ -1,17 +1,17 @@
-in    dat 0
-done  dat 0
-acc   dat 0
-one   dat 1
-two   dat 2
+; Multiply two integer inputs and output the result
 
-loop  lda two
-      add acc
-      sta two
-      lda acc
-      sub one
-      jaz loop
+        INP     ; Read the first input into the accumulator
+        STA     R1      ; Store the first input in R1
+        INP     ; Read the second input into the accumulator
+        STA     R2      ; Store the second input in R2
 
-      lda two
-      out
-      hlt
+        CLA     ; Clear the accumulator
+        STA     R3      ; Initialize R3 as the running total
 
+LOOP    ADD     R2      ; Add the second input to the running total
+        SUBI    R1,     ; Subtract 1 from the first input
+        BZ      DONE    ; If the first input is 0, exit the loop
+        JMP     LOOP    ; Otherwise, continue looping
+
+DONE    OUT     R3      ; Output the result
+        HLT             ; Halt the program
